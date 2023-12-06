@@ -3,11 +3,37 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  createHashRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+import { Home } from './components/pages/Home';
+import { About } from './components/pages/About';
+import { Root } from './components/Root';
+
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <Root/>,
+    children: [
+      {
+        path: "/",
+        element: <Home/>,
+      },
+      {
+        path: "/about",
+        element: <About/>,
+      },
+    ]
+  },
+  
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
